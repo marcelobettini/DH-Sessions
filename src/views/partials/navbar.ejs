@@ -1,0 +1,23 @@
+<head>
+  <link rel="stylesheet" href="/navbar.css">
+</head>
+<header>
+  <nav>
+    <ul>
+      <% if(currentRoute !=="/auth/login" && currentRoute !=="/auth/register" && !user){%>
+        <li><a href="/auth/login">login</a></li>
+        <%}%>
+
+          <%if(user){%>
+            <li><a href="/auth/logout">logout</a></li>
+            <%}%>
+
+
+
+              <% if(currentRoute !=="/" ){%>
+                <li><a href="/">home</a></li>
+                <% } %>
+    </ul>
+  </nav>
+  <h1>Movies Database</h1>
+</header>

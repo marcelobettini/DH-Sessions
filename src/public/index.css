@@ -1,0 +1,68 @@
+body {
+  background-color: rgb(30, 28, 28);
+  overflow-y: scroll;
+  margin: 0
+    /* Forzar siempre la barra de desplazamiento vertical */
+}
+
+.container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  border: 1px solid;
+
+}
+
+.movieContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  place-content: center;
+}
+
+.movieCard {
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  box-shadow: 3px 3px 10px rgb(0, 0, 0);
+  padding: 0 1em;
+  border-style: solid;
+  --border-size: 4px;
+  --border-angle: 0turn;
+  background-image: conic-gradient(from var(--border-angle), rgb(255, 255, 255), rgb(255, 255, 255) 50%, rgb(255, 255, 255)), conic-gradient(from var(--border-angle), transparent 100%, rgb(12, 120, 214), rgb(239, 170, 11));
+  background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)), cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 9px;
+}
+
+.movieCard img {
+  margin-top: 10px;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+.movieCard h3 {
+  font-size: 2rem;
+  color: black
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+.movieCard:hover {
+  background-image: conic-gradient(from var(--border-angle), rgb(255, 255, 255), rgb(255, 255, 255) 50%, rgb(255, 255, 255)), conic-gradient(from var(--border-angle), transparent 20%, rgb(12, 120, 214), rgb(239, 170, 11));
+  -webkit-animation: bg-spin 3s linear infinite;
+  animation: bg-spin 3s linear infinite;
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}

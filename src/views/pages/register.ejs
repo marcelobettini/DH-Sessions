@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/head")%>
+    <link rel="stylesheet" href="/authForm.css">
+</head>
+
+<body>
+  <div class="container">
+    <%- include('../partials/navbar') %>
+      <section class="formContainer">
+        <h2>Create an account</h2>
+
+        <% const errorMap={}; %>
+          <% errors.forEach(err=> { %>
+            <% errorMap[err.path]=err.msg; %>
+              <% }); %>
+
+                <form action='/auth/register' method='post'>
+                  <div role='group'>
+                    <label for="name">Full Name</label>
+                    <input type="text" name='name' id='name' placeholder='Your name...' title='First and last name.'>
+                    <label for="email">Email</label>
+                    <input type="text" name='email' id='email' placeholder='Your email...'
+                      title='Must enter a valid email.' value="<%- prevValues.email || ''%>" />
+                    <!-- Display error message below the input field -->
+                    <% if (errorMap.email) { %>
+                      <p class="error-message">
+                        <%= errorMap.email %>
+                      </p>
+                      <% } %>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" placeholder='Your security password...'
+                          title='Must contain 8 to 20 characters.' value="<%- prevValues.password || ''%>" />
+                        <!-- Display error message below the input field -->
+                        <% if (errorMap.password) { %>
+                          <p class="error-message">
+                            <%= errorMap.password %>
+                          </p>
+                          <% } %>
+                            <label for="repeatPassword">Repeat Password</label>
+                            <input type="password" name="repeatPassword" id="repeatPassword"
+                              placeholder='Repeat your password...' title='Must be equal to password.'
+                              value="<%- prevValues.repeatPassword || ''%>" />
+                            <!-- Display error message below the input field -->
+                            <% if (errorMap.password) { %>
+                              <p class="error-message">
+                                <%= errorMap.password %>
+                              </p>
+                              <% } %>
+                  </div>
+                  <input type="submit" value="Submit">
+                </form>
+
+                <div role='group' class='bottomGroup'>
+                  <p>I you already have an account you can login</p>
+                  <a href="/auth/login" class='button button-outline'>Login</a>
+                </div>
+      </section>
+  </div>
+</body>
+
+</html>

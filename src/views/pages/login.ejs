@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/head")%>
+    <link rel="stylesheet" href="/authForm.css">
+
+</head>
+
+<body>
+  <div class="container">
+    <%- include('../partials/navbar') %>
+      <section class='formContainer'>
+        <h2>Login</h2>
+
+        <% const errorMap={}; %>
+          <% errors.forEach(err=> { %>
+            <% errorMap[err.path]=err.msg; %>
+              <% }); %>
+
+                <form action='/auth/login' method='post'>
+                  <div>
+                    <label for="email">Email</label>
+                    <input type="text" name='email' id='email' placeholder='enter a valid email...'
+                      title='Escriba un email válido...' value="<%- prevValues.email || ''%>" />
+                    <!-- Display error message below the input field -->
+                    <% if (errorMap.email) { %>
+                      <p class="error-message">
+                        <%= errorMap.email %>
+                      </p>
+                      <% } %>
+
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password"
+                          placeholder='8 to 20 characters, numbers, letters, no blank spaces...'
+                          title='Solo letras y números' value="<%- prevValues.password || ''%>" />
+                        <!-- Display error message below the input field -->
+                        <% if (errorMap.password) { %>
+                          <p class="error-message">
+                            <%= errorMap.password %>
+                          </p>
+                          <% } %>
+                  </div>
+                  <input type="submit" value="LOGIN" class='button'>
+
+                </form>
+                <div role='group' class='bottomGroup'>
+                  <p>Don't have an account? Create one completely free</p>
+                  <a href="/auth/register" class='button button-outline'>
+                    Create an account
+                  </a>
+                </div>
+      </section>
+  </div>
+</body>
+
+</html>
